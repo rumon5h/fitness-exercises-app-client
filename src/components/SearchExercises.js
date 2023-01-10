@@ -5,7 +5,18 @@ import { fetchData } from "../utils/fetchData";
 const SearchExercises = () => {
   const [search, setSearch] = useState("");
   const [exercises, setExercises] = useState([]);
-  
+  const [bodyParts, setBodyParts] = useState([]);
+
+  useEffect(() => {
+    const fetchExercisesData = async () => {
+
+      const url = "https://fitness-k7ff.onrender.com/api/v1/exercises/bodyPartList";
+      const bodyPartsData = await fetchData(url);
+
+      setBodyParts(['all', ...bodyPartsData])
+    }
+    fetchExercisesData();
+  },[])
 
   const handleSearch = async () => {
     const url = "https://fitness-k7ff.onrender.com/api/v1/exercises";
